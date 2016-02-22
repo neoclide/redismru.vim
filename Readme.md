@@ -29,6 +29,10 @@ _node script is used for async file validte_
 
         npm install
 
+* Export neovim socket file, like:
+
+        export NVIM_LISTEN_ADDRESS=/tmp/neovim
+
 ##🍚Usage
 
 * Open unite source with redismru source like:
