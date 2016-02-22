@@ -1,0 +1,19 @@
+{
+  "name": "redismru.vim",
+  "version": "1.0.0",
+  "description": "Async most recently used files plugin for vim using Redis.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "neovim-client": "^1.0.7",
+    "node-parallel": "^0.1.6",
+    "redis": "^2.4.2"
+  }
+}

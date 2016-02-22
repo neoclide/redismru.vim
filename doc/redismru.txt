@@ -1,0 +1,147 @@
+*redismru.txt*		A performed mru plugin with unite supported
+
+                      __   _~
+                     |  ] (_)~
+ _ .--.  .---.   .--.| |  __   .--.   _ .--..--.   _ .--.  __   _~
+[ `/'`\]/ /__\\/ /'`\' | [  | ( (`\] [ `.-. .-. | [ `/'`\][  | | |~
+ | |    | \__.,| \__/  |  | |  `'.'.  | | | | | |  | |     | \_/ |,~
+[___]    '.__.' '.__.;__][___][\__) )[___||__||__][___]    '.__.'_/~
+
+
+Author  : Qiming Zhao <chemzqm@gmail.com>
+Version : 0.1.0
+License : MIT license {{{
+
+  Copyright (c) 2016 chemzqm@gmail.com
+
+  Permission is hereby granted, free of charge, to any person obtaining
+  a copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to
+  permit persons to whom the Software is furnished to do so, subject to
+  the following conditions:
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+}}}
+
+==============================================================================
+CONTENTS				*redismru-contents*
+
+INTRODUCTION		|redismru-introduction|
+PREREQUIREMENT		|redismru-prerequirement|
+INSTALLATION		|redismru-installation|
+INTERFACE		|redismru-interface|
+  COMMANDS			|redismru-commands|
+  ACTIONS			|redismru-actions|
+  VARIABLES			|redismru-variables|
+CHANGELOG		|redismru-changelog|
+
+==============================================================================
+INTRODUCTION				*redismru-introduction*
+
+Redismru is a vim MRU (most recently used) file plugin built for neovim
+(there is a plan to support original vim). Redismru using local redis server
+as backend and using |job-control| feature to make it's won't affect your vim
+startup time.
+
+Redismru automatically start async file validation and file list load on vim
+startup.
+
+==============================================================================
+PREREQUIREMENT				*redismru-prerequirement*
+
+You'll have to install redis http://redis.io/ before you use this plugin.
+It's recommended to use the default options (port 6379), use iptables command
+if you want to secure your redis.
+
+Redismru use unite.vim https://github.com/Shougo/unite.vim interface, so you
+will have to install it, like:
+
+	Plug 'Shougo/unite.vim'
+	
+Redismru use nodejs script to validate files in a subprocess, you need to run
+command 
+
+	npm install
+
+inside the root directory of project.
+
+==============================================================================
+INSTALLATION				*redismru-installation*
+
+Install with your favorite plugin managers like NeoBundle/Plugin/Plug
+>
+	NeoBundle 'chemzqm/redismru.vim'
+	Plugin 'chemzqm/redismru.vim'
+	Plug 'chemzqm/redismru.vim'
+
+==============================================================================
+INTERFACE				*redismru-interface*
+
+You can use |unite| to open unite interface with redismru as source, press
+<cr> to open the selected buffer, press <d> to remove the file form mru
+list (no actually file remove performed).
+
+Redismru source use inherited file kind, you can use file actions for the
+candidates.
+
+------------------------------------------------------------------------------
+COMMANDS 				*redismru-commands*
+
+:Unite {opts} redismru				*unite-redismru*
+
+		Show MRU list in unite list, files would be ordered descended
+		by vim access time. You can use unite options, see
+		|unite-options|
+
+:MruValidate					*mruvalidate*
+
+		Validate the files in mru list, it would remove the items that
+		no longer a exist file.
+
+
+------------------------------------------------------------------------------
+ACTIONS 				*redismru-actions*
+
+delete					*redismru-delete*
+
+	remove current from mru list (both from unite and redis-server)
+
+------------------------------------------------------------------------------
+VARIABLES 				*redismru-variables*
+
+Some optional variables could be used to customize the behaviour of Redismru.
+
+*g:redismru_args*
+
+	Arguments string that passed to redis-cli command line.
+
+*g:redismru_limit*
+
+	Limit the max number loaded when into mru list, default 1000.
+
+*g:redismru_key*
+
+	The key name inside redis server, default 'vimmru'.
+
+
+==============================================================================
+CHANGELOG				 *redismru-changelog*
+
+0.1.0 - Feb 22, 2016
+	
+	init
+
+==============================================================================
+
+vim:tw=78:ts=8:sts=8:ft=help:nosta:noet:fen:fdm=marker:
