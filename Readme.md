@@ -8,7 +8,7 @@ as other MRU plugins did**!
 It works for vim with `has('job')` (there's bug for vim on the callback support,
 so it's note working) and neovim.
 
-## 🔍Install
+##🔍Install
 
 * install redis with command like:
 
@@ -20,15 +20,16 @@ so it's note working) and neovim.
 
 _node script is used for async file validte_
 
-* install this plugin with plugin manager like vim-plug by:
+* install this plugin and unite.vim with plugin manager like vim-plug by:
 
+        Plug 'Shougo/unite.vim'
         Plug 'chemzqm/redismru.vim'
 
 * CD to the project root and run:
 
         npm install
 
-## ♨ Usage
+##♨ Usage
 
 * Open unite source with redismru source like:
 
