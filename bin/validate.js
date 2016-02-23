@@ -10,22 +10,33 @@ if (!socket) {
   console.error('NVIM_LISTEN_ADDRESS environment variable is required')
   process.exit()
 }
+
 var conn = net.connect({path: socket})
 attach(conn, conn, function (err, nvim) {
-  nvim.eval('get(g:, "redis_mru_key", "vimmru")', function (err, redis_key) {
+  var variables = ['redismru_host', 'redismru_port', 'redismru_key']
+  var parallel = new Parallel()
+  variables.forEach(function (v) {
+    parallel.add(function (cb) {
+      nvim.eval('get(g:, "' + v + '", "")', function (err, val) {
+        cb(err, val)
+      })
+    })
+  })
+
+  parallel.done(function (err, vals) {
     if (err) return console.error(err)
-    var client = redis.createClient()
+    var client = redis.createClient(vals[1] || 6379, vals[0] || '127.0.0.1')
     client.on('error', function (err) {
       console.error('validate error: ' + err.message)
     })
 
-    client.zrange(redis_key, 0, 2000, function (err, members) {
+    client.zrange(vals[2] || 'vimmru', 0, 2000, function (err, members) {
       var p = new Parallel()
       members.forEach(function (file) {
         p.add(function (cb) {
           fs.stat(file, function (err, stats) {
             if (err || !stats.isFile()) {
-              client.zrem(redis_key, file, function (err) {
+              client.zrem(vals[2], file, function (err) {
                 if (err) return cb(err)
                 cb()
               })

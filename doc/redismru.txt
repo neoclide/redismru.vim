@@ -130,6 +130,11 @@ Some optional variables could be used to customize the behaviour of Redismru.
 
 	Limit the max number loaded when into mru list, default 1000.
 
+*g:redismru_host*
+*g:redismru_port*
+
+	Set redis host and port.
+	
 *g:redismru_key*
 
 	The key name inside redis server, default 'vimmru'.
@@ -137,6 +142,10 @@ Some optional variables could be used to customize the behaviour of Redismru.
 
 ==============================================================================
 CHANGELOG				 *redismru-changelog*
+
+0.1.1 - Feb 23, 2016
+
+	support redis host and port
 
 0.1.0 - Feb 22, 2016
 	

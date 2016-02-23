@@ -1,7 +1,9 @@
 if !has('job') && !has('nvim') | finish | endif
-let s:command = 'redis-cli '.get(g:, 'redismru_args','')
+let g:redismru_host = '127.0.0.1'
+let g:redismru_port = 6379
+let s:command = 'redis-cli -h '.get(g:, 'redismru_host','127.0.0.1'). ' -p '.get(g:, 'redismru_port', 6379)
 let s:rediskey = get(g:, 'redismru_key', 'vimmru')
-let s:mrulimit = get(g:, 'redismru_limit', 1000)
+let s:mrulimit = get(g:, 'redismru_limit', 2000)
 let s:loaded = 0
 let s:validate_prog = expand('<sfile>:h:h').'/bin/validate.js'
 
@@ -21,7 +23,7 @@ endfunction
 
 " validate files at background
 function! redismru#validate(opts)
-  call jobstart('node '.s:validate_prog,  {
+  call s:jobstart('node '.s:validate_prog,  {
     \ 'on_stderr': function('s:OnError'),
     \ 'on_exit': function('s:OnExit'),
     \ 'action': 'validate',
@@ -54,7 +56,7 @@ endfunction
 " call redis with command args
 function! s:redis(action, args)
   let cmd = s:command . ' ' . a:args
-  call jobstart(cmd, {
+  call s:jobstart(cmd, {
     \ 'on_stderr': function('s:OnError'),
     \ 'on_stdout': function('s:OnData'),
     \ 'on_exit': function('s:OnExit'),
@@ -101,5 +103,5 @@ function! s:jobstart(cmd, opts)
      endfor
   endif
   let start = has('nvim') ? 'jobstart' : 'job_start'
-  execute 'call '.start.'("'.a:cmd.'", '.opts.')'
+  execute 'call '.start.'(a:cmd, opts)'
 endfunction

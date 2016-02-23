@@ -10,6 +10,9 @@ so it's not working).
 
 ![redismru](https://chemzqm.me/images/02-23/redismru.jpg)
 
+**Note**, async file validate and load at startup and would cost 200ms~2000ms, you
+can't get the list during this duration.
+
 ##🔍Install
 
 * install redis with command like:
@@ -34,6 +37,14 @@ _node script is used for async file validate_
 * Export neovim socket file, like:
 
         export NVIM_LISTEN_ADDRESS=/tmp/neovim
+
+##🚧Configuratio
+
+* **redismru_host** for redis host to connent (default 127.0.0.1).
+* **redismru_port** for redis port to connent (default 6379).
+* **redismru_key** for redis key to use for MRU list (default 'vimmru').
+* **redismru_limit** for limit the count for MRU list load and validat
+  (should no more than 2000)
 
 ##🍚Usage
 
