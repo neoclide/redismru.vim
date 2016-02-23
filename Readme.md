@@ -38,7 +38,7 @@ _node script is used for async file validate_
 
         export NVIM_LISTEN_ADDRESS=/tmp/neovim
 
-##🚧Configuratio
+##🚧Configuration
 
 * **redismru_host** for redis host to connent (default 127.0.0.1).
 * **redismru_port** for redis port to connent (default 6379).
