@@ -16,7 +16,7 @@ endfunction
 
 augroup redismru
   autocmd!
-  autocmd VimEnter * call redismru#validate({'detach': 0, 'load': 1})
+  autocmd VimEnter * call redismru#load({'detach': 0, 'load': 1})
   autocmd BufEnter,BufWinEnter,BufWritePost *
         \ call s:append(expand('<amatch>'))
   autocmd VimLeavePre *
