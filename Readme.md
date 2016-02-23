@@ -2,11 +2,13 @@
 
 Most recently used files plugin for vim using Redis and job-control feature.
 
-It's build for speed! Since every IO operation is async, **it won't block the UI
-as other MRU plugins did**!
+Some MRU would cost nearly 50ms to load MRU files at vim startup, this plugin
+use async job-control feature to avoid it.
 
-It works for vim with `has('job')` (there's bug for vim on the callback support,
-so it's note working) and neovim.
+It works for neovim and vim with `has('job')` (there's bug for vim on the callback support,
+so it's not working).
+
+![redismru](https://chemzqm.me/images/02-23/redismru.jpg)
 
 ##🔍Install
 
