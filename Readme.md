@@ -20,7 +20,7 @@ so it's not working).
 
         brew install node
 
-_node script is used for async file validte_
+_node script is used for async file validate_
 
 * install this plugin and unite.vim with plugin manager like vim-plug by:
 
