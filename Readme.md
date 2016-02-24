@@ -56,7 +56,7 @@ _node script is used for async file validate_
 
         :MruValidate
 
-_validate would start async when vim start, so you normally don't need this_
+_validate would start async when vim exit, so you normally don't need this_
 
 see `h:redismru` to learn more.
 
