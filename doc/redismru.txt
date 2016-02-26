@@ -49,10 +49,9 @@ CHANGELOG		|redismru-changelog|
 ==============================================================================
 INTRODUCTION				*redismru-introduction*
 
-Redismru is a vim MRU (most recently used) file plugin built for neovim
-(there is a plan to support original vim). Redismru using local redis server
-as backend and using |job-control| feature to make it's won't affect your vim
-startup time.
+Redismru is a vim MRU (most recently used) file plugin built for neovim and vim
+with |job| feature. Redismru using local redis server as backend and using
+|job-control| feature to make it's won't affect your vim startup time.
 
 Redismru automatically start async file validation and file list load on vim
 startup.
@@ -69,8 +68,8 @@ will have to install it, like:
 
 	Plug 'Shougo/unite.vim'
 	
-Redismru use nodejs script to validate files in a subprocess, you need to run
-command 
+Redismru use nodejs script to validate files in a subprocess on vim leave, you
+need to run this command after installed:
 
 	npm install
 
