@@ -10,8 +10,8 @@ so it's not working).
 
 ![redismru](https://chemzqm.me/images/02-23/redismru.jpg)
 
-**Note**, async file validate and load at startup and would cost 200ms~2000ms, you
-can't get the list during this duration.
+**Note**, async file load at startup and would cost 10~100ms, you
+can't get the list before it finish.
 
 ##🔍Install
 
