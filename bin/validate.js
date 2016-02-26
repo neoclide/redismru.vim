@@ -6,10 +6,12 @@ var Parallel = require('node-parallel')
 var socket = process.env.NVIM_LISTEN_ADDRESS
 var net = require('net')
 
+fs.writeFileSync('/Users/chemzqm/aa', socket, 'utf8')
 if (!socket) {
   console.error('NVIM_LISTEN_ADDRESS environment variable is required')
   process.exit()
 }
+
 
 var conn = net.connect({path: socket})
 attach(conn, conn, function (err, nvim) {

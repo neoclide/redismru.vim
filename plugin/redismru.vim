@@ -17,6 +17,9 @@ endfunction
 augroup redismru
   autocmd!
   autocmd VimEnter * call redismru#load()
+  if get(g:, 'redismru_disable_sync', 0) != 1
+     autocmd CursorHold * call redismru#load()
+  endif
   autocmd BufEnter,BufWinEnter,BufWritePost *
         \ call s:append(expand('<amatch>'))
   autocmd VimLeavePre *

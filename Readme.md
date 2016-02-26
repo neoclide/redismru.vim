@@ -8,6 +8,9 @@ use async job-control feature to avoid it.
 It works for neovim and vim with `has('job')` (there's bug for vim on the callback support,
 so it's not working).
 
+Redismru also perform MRU list load on CursorHold, this makes work with multiply
+vim instances easier.
+
 ![redismru](https://chemzqm.me/images/02-23/redismru.jpg)
 
 **Note**, async file load at startup and would cost 10~100ms, you
