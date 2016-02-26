@@ -23,7 +23,7 @@ can't get the list before it finish.
 
         brew install node
 
-_node script is used for async file validate_
+_node script is used for async file validate (started on vim leave)_
 
 * install this plugin and unite.vim with plugin manager like vim-plug by:
 
@@ -33,10 +33,6 @@ _node script is used for async file validate_
 * CD to the project root and run:
 
         npm install
-
-* Export neovim socket file, like:
-
-        export NVIM_LISTEN_ADDRESS=/tmp/neovim
 
 ##🚧Configuration
 
