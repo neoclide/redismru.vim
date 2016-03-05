@@ -97,11 +97,14 @@ candidates.
 ------------------------------------------------------------------------------
 COMMANDS 				*redismru-commands*
 
-:Unite {opts} redismru				*unite-redismru*
+:Unite {opts} redismru[:dir]				*unite-redismru*
 
 		Show MRU list in unite list, files would be ordered descended
 		by vim access time. You can use unite options, see
 		|unite-options|
+
+		You can limit the mru files within a directory by optional dir
+		as unite argument.  Use . for current working directory.
 
 :MruValidate					*mruvalidate*
 

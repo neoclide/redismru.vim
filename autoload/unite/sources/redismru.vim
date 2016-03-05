@@ -8,7 +8,7 @@ endfunction
 let g:redismru_ignore_pattern = get(g:, 'redismru_ignore_pattern',
       \'\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
       \'\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
-      \'\|^\%(\\\\\|/mnt/\|/media/\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'
+      \'\|^\%(__\|todo://\|\\\\\|/mnt/\|/media/\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'
       \)
 
 let s:source = {
@@ -22,11 +22,19 @@ let s:source = {
       \}
 
 function! s:source.gather_candidates(args, context)
-  let files = redismru#files()
-  if empty(files) | return [] | endif
   let home = expand('~')
-  return map(copy(files), "{
-      \ 'word': substitute(v:val, home, '~', ''),
+  if empty(a:args)
+    let files = copy(redismru#files())
+  else
+    let dir = a:args[0]
+    let dir = dir ==# '.' ? getcwd() : dir
+    let files = filter(copy(redismru#files()), "stridx(v:val, dir) == 0")
+  endif
+  if empty(files) | return [] | endif
+  let base = exists('dir') ? dir : home
+  return map(files, "{
+      \ 'word': v:val[len(base):],
+      \ 'abbr': substitute(v:val, home, '~', ''),
       \ 'action__path': v:val,
       \}")
 endfunction

@@ -51,7 +51,11 @@ _node script is used for async file validate (started on vim leave)_
 
         Unite redismru
 
-* Validate the all mru files manully:
+* Open unite redismru source with files limit in current cwd:
+
+        Unite redismru:.
+
+* Validate all mru files manully:
 
         :MruValidate
 
