@@ -30,14 +30,15 @@ attach(conn, conn, function (err, nvim) {
     client.on('error', function (err) {
       console.error('validate error: ' + err.message)
     })
+    var key = vals[2] || 'vimmru'
 
-    client.zrange(vals[2] || 'vimmru', 0, 2000, function (err, members) {
+    client.zrange(key, 0, 2000, function (err, members) {
       var p = new Parallel()
       members.forEach(function (file) {
         p.add(function (cb) {
           fs.stat(file, function (err, stats) {
             if (err || !stats.isFile()) {
-              client.zrem(vals[2], file, function (err) {
+              client.zrem(key, file, function (err) {
                 if (err) return cb(err)
                 cb()
               })
