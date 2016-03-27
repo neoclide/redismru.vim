@@ -47,7 +47,7 @@ let s:source.action_table.delete = {
       \ }
 function! s:source.action_table.delete.func(candidates) abort "{{{
   for candidate in a:candidates
-    call redismru#remove(candidate.word)
+    call redismru#remove(candidate.action__path)
   endfor
 endfunction"}}}
 
