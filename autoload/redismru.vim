@@ -1,7 +1,7 @@
 if !has('job') && !has('nvim') | finish | endif
-let g:redismru_host = '127.0.0.1'
-let g:redismru_port = 6379
-let s:command = 'redis-cli -h '.get(g:, 'redismru_host','127.0.0.1'). ' -p '.get(g:, 'redismru_port', 6379)
+let g:redismru_host = get(g:, 'redismru_host', '127.0.0.1')
+let g:redismru_port = get(g:, 'redismru_port', 6379)
+let s:command = 'redis-cli -h '.g:redismru_host. ' -p '.g:redismru_port
 let s:rediskey = get(g:, 'redismru_key', 'vimmru')
 let s:mrulimit = get(g:, 'redismru_limit', 2000)
 let s:loaded = 0
