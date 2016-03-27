@@ -16,9 +16,9 @@ endfunction
 
 augroup redismru
   autocmd!
-  autocmd VimEnter * call redismru#load()
+  autocmd VimEnter * call redismru#validate({'detach': 0, 'load': 1})
   if get(g:, 'redismru_disable_sync', 0) != 1
-     autocmd CursorHold * call redismru#load()
+     autocmd CursorHold * call redismru#validate({'detach': 0, 'load': 1})
   endif
   autocmd BufEnter,BufWinEnter,BufWritePost *
         \ call s:append(expand('<amatch>'))

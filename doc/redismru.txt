@@ -154,8 +154,9 @@ CHANGELOG				 *redismru-changelog*
 
 0.3.0 - Mar 27, 2016
 
-	fix delete action not works
+	fix delete action not works.
 	support base directory as first argument.
+	validate and load files on startup and cursorhold.
 
 0.2.0 - Feb 26, 2016
 

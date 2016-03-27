@@ -1,15 +1,19 @@
 # 🚩 Redismru.vim
 
-Most recently used files plugin for vim using Redis and job-control feature.
+Most recently used files plugin for neovim using Redis and job-control feature.
 
 Some MRU would cost nearly 50ms to load MRU files at vim startup, this plugin
 use async job-control feature to avoid it.
 
-It works for neovim and vim with `has('job')` (there's bug for vim on the callback support,
-so it's not working).
-
 Redismru also perform MRU list load on CursorHold, this makes work with multiply
 vim instances easier.
+
+You can also limit the files shown by Redismru by pass the a directory as first
+unite argument, like:
+
+    Unite redismru:[your_directory_path]
+
+`[your_directory_path]` could also be `.` to indicate current working directory.
 
 ![redismru](https://chemzqm.me/images/02-23/redismru.jpg)
 
