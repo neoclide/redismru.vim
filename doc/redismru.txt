@@ -1,4 +1,6 @@
-*redismru.txt*		A performed mru plugin with unite supported
+*redismru.txt*	For neovim and Vim version 7.4.1590 or later.
+
+	A performed mru plugin with unite supported
 
                       __   _~
                      |  ] (_)~
@@ -9,7 +11,7 @@
 
 
 Author  : Qiming Zhao <chemzqm@gmail.com>
-Version : 0.2.0
+Version : 0.3.0
 License : MIT license {{{
 
   Copyright (c) 2016 chemzqm@gmail.com
@@ -150,7 +152,12 @@ Some optional variables could be used to customize the behaviour of Redismru.
 ==============================================================================
 CHANGELOG				 *redismru-changelog*
 
-0.2.0 = Feb 26, 2016
+0.3.0 - Mar 27, 2016
+
+	fix delete action not works
+	support base directory as first argument.
+
+0.2.0 - Feb 26, 2016
 
 	add auto reload mru files support
 
