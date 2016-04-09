@@ -22,8 +22,10 @@ augroup redismru
   endif
   autocmd BufEnter,BufWinEnter,BufWritePost *
         \ call s:append(expand('<amatch>'))
-  autocmd VimLeavePre *
+  if get(g:, 'redismru_disable_auto_validate', 0) != 1
+    autocmd VimLeavePre *
         \ call redismru#validate({'detach': 1, 'load': 0})
+  endif
 augroup END
 
 command! -nargs=0 MruValidate :call
