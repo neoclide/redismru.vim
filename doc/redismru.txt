@@ -155,6 +155,10 @@ Some optional variables could be used to customize the behaviour of Redismru.
 ==============================================================================
 CHANGELOG				 *redismru-changelog*
 
+0.3.2 - Apr 19, 2016
+
+	use load method for sync data, not validate
+
 0.3.1 - Apr 09, 2016
 
 	add redismru_disable_auto_validate option
