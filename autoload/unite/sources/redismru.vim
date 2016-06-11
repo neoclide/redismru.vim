@@ -34,9 +34,17 @@ function! s:source.gather_candidates(args, context)
   let base = exists('dir') ? dir : home
   return map(files, "{
       \ 'word': v:val[len(base):],
-      \ 'abbr': substitute(v:val, home, '~', ''),
+      \ 'abbr': s:relativePath(v:val, base),
       \ 'action__path': v:val,
       \}")
+endfunction
+
+function! s:relativePath(value, base)
+  let home = expand('~')
+  if a:base == home
+    return substitute(a:value, home, '~', '')
+  endif
+  return '.' . a:value[len(a:base):]
 endfunction
 
 let s:source.action_table.delete = {

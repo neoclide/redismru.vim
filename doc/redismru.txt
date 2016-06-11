@@ -155,6 +155,10 @@ Some optional variables could be used to customize the behaviour of Redismru.
 ==============================================================================
 CHANGELOG				 *redismru-changelog*
 
+0.3.3 - Jun 11, 2016
+
+	use relative path when searching with base directory
+
 0.3.2 - Apr 19, 2016
 
 	use load method for sync data, not validate
