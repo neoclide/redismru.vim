@@ -32,7 +32,7 @@ attach(conn, conn, function (err, nvim) {
     })
     var key = vals[2] || 'vimmru'
 
-    client.zrange(key, 0, 2000, function (err, members) {
+    client.zrange(key, 0, 4000, function (err, members) {
       var p = new Parallel()
       members.forEach(function (file) {
         p.add(function (cb) {
