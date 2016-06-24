@@ -8,8 +8,8 @@ function! s:append(path)
   if bufnr('%') !=# expand('<abuf>')|| a:path ==# ''
     return
   endif
-  if len(&buftype) | return | endif
-  let g:path = a:path
+  if &buftype =~# '\v(help|nofile|terminal)' | return | endif
+  if a:path =~# '__easygit' | return | endif
   if a:path =~# '\[unite\]' | return | endif
   call redismru#append(expand('%:p'))
 endfunction

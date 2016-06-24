@@ -18,7 +18,7 @@ let s:source = {
       \ "action_table" : {},
       \ "default_kind": 'file',
       \ 'ignore_pattern' : g:redismru_ignore_pattern,
-      \ "max_candidates" : 200,
+      \ "max_candidates" : 400,
       \}
 
 function! s:source.gather_candidates(args, context)
