@@ -8,7 +8,7 @@ endfunction
 let g:redismru_ignore_pattern = get(g:, 'redismru_ignore_pattern',
       \'\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
       \'\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
-      \'\|^\%(__\|todo://\|\\\\\|/mnt/\|/media/\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'
+      \'\|^\%(__\|todo://\|\\\\\|/mnt/\|/media/\|/temp/\|\%(/private\)\=/tmp/\|\%(/private\)\=/var/folders/\)'
       \)
 
 let s:source = {

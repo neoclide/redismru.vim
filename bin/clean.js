@@ -35,6 +35,7 @@ client.zrange(key, 0, 4000, function (err, members) {
 
 function isTempFile(file) {
   var parts = file.split(/\//g)
+  if (parts.indexOf('private') == 0) return true
   if (parts.indexOf('node_modules') !== -1) return true
   if (parts.indexOf('.git') !== -1) return true
   var base = path.basename(file)
