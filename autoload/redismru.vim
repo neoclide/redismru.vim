@@ -25,26 +25,26 @@ function! s:warp_vim_startjob(argv, opts)
     let obj._argv = a:argv
     let obj._opts = a:opts
 
-    function! obj._out_cb(job_id, data)
+    function! obj._out_cb(job_id, data) dict
         if has_key(self._opts, 'on_stdout')
             call self._opts.on_stdout(a:job_id, [a:data], 'stdout')
         endif
     endfunction
 
-    function! obj._err_cb(job_id, data)
+    function! obj._err_cb(job_id, data) dict
         if has_key(self._opts, 'on_stderr')
             call self._opts.on_stderr(a:job_id, [a:data], 'stderr')
         endif
     endfunction
 
-    function! obj._exit_cb(job_id, data)
+    function! obj._exit_cb(job_id, data) dict
         if has_key(self._opts, 'on_exit')
             call self._opts.on_exit(a:job_id, [a:data], 'exit')
         endif
     endfunction
 
     let obj = {
-        \ 'argv': a:argv,
+        \ 'argv': split(a:argv, '\s'),
         \ 'opts': {
             \ 'mode': 'nl',
             \ 'out_cb': obj._out_cb,
@@ -61,8 +61,7 @@ function! redismru#load()
   if s:loaded
     let s:mru_files = []
   endif
-  let g:called = 1
-  call s:redis('load', 'ZREVRANGE '.s:rediskey.' 0 '.s:mrulimit.'|sed ''s/^\d+)\s"\(.*\)"$/\1/''')
+  call s:redis('load', 'ZREVRANGE '.s:rediskey.' 0 '.s:mrulimit)
 endfunction
 
 function! redismru#files()
@@ -118,7 +117,6 @@ function! s:OnError(job_id, data, event) dict
 endfunction
 
 function! s:OnData(job_id, data, event) dict
-  let g:action = self.action
   if self.action ==# 'load'
     let data = type(a:data) == 1 ? [data] : copy(a:data)
     for path in data

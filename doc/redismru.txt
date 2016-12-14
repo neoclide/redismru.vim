@@ -11,7 +11,7 @@
 
 
 Author  : Qiming Zhao <chemzqm@gmail.com>
-Version : 0.3.0
+Version : 0.4.0
 License : MIT license {{{
 
   Copyright (c) 2016 chemzqm@gmail.com
@@ -126,22 +126,27 @@ VARIABLES 				*redismru-variables*
 
 Some optional variables could be used to customize the behaviour of Redismru.
 
-*g:redismru_args*
+*g:redismru_ignore_pattern*
 
-	Arguments string that passed to redis-cli command line.
+	Ignore pattern string for file paths, defualt:
+
+	\'\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
+	\'\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
+	\'\|^\%(__\|todo://\|\\\\\|/mnt/\|/media/\|/temp/\|\%(/private\)\=/tmp/\|\%(/private\)\=/var/folders/\)'
 
 *g:redismru_limit*
 
-	Limit the max number loaded when into mru list, default 1000.
+	Limit the max number loaded when into mru list, default 2000.
 
 *g:redismru_host*
 *g:redismru_port*
 
 	Set redis host and port.
+	Default `127.0.0.1` and `6379`
 	
 *g:redismru_key*
 
-	The key name inside redis server, default 'vimmru'.
+	The key name inside redis server, default `vimmru`.
 
 *g:redismru_disable_sync*
 
@@ -154,6 +159,12 @@ Some optional variables could be used to customize the behaviour of Redismru.
 
 ==============================================================================
 CHANGELOG				 *redismru-changelog*
+
+0.4.0 - Dec 15, 2016
+
+	works with vim8 with async feature
+	respect ignore pattern
+	add denite source
 
 0.3.3 - Jun 11, 2016
 

@@ -3,12 +3,12 @@ var redis = require('redis')
 var fs = require('fs')
 var path = require('path')
 
-var client = redis.createClient(6379, '127.0.0.1')
+var client = redis.createClient(process.argv[3], process.argv[2])
 client.on('error', function (err) {
   console.error('validate error: ' + err.message)
 })
 
-var key = 'vimmru'
+var key = process.argv[4]
 
 client.zrange(key, 0, 4000, function (err, members) {
   var p = new Parallel()
@@ -35,6 +35,7 @@ client.zrange(key, 0, 4000, function (err, members) {
 
 function isTempFile(file) {
   var parts = file.split(/\//g)
+  if (parts.indexOf('tmp') == 0) return true
   if (parts.indexOf('private') == 0) return true
   if (parts.indexOf('node_modules') !== -1) return true
   if (parts.indexOf('.git') !== -1) return true
