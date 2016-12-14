@@ -1,15 +1,22 @@
 if !has('job') && !has('nvim') | finish | endif
 
 let s:nvim_jobcontrol = has('nvim')
-let s:vim_jobcontrol = !has('nvim') && has('job') && has('patch-7-4-1590')
+let s:vim_jobcontrol = !has('nvim') && has('job')
 
+let g:redismru_ignore_pattern = get(g:, 'redismru_ignore_pattern',
+      \'\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
+      \'\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
+      \'\|^\%(__\|todo://\|\\\\\|/mnt/\|/media/\|/temp/\|\%(/private\)\=/tmp/\|\%(/private\)\=/var/folders/\)'
+      \)
 let g:redismru_host = get(g:, 'redismru_host', '127.0.0.1')
 let g:redismru_port = get(g:, 'redismru_port', 6379)
+
 let s:command = 'redis-cli -h '.g:redismru_host. ' -p '.g:redismru_port
 let s:rediskey = get(g:, 'redismru_key', 'vimmru')
 let s:mrulimit = get(g:, 'redismru_limit', 2000)
 let s:loaded = 0
 let s:validate_prog = expand('<sfile>:h:h').'/bin/clean.js'
+let s:validate_args = g:redismru_host.' '.g:redismru_port.' '.s:rediskey
 
 let s:mru_files = []
 
@@ -64,7 +71,7 @@ endfunction
 
 " validate files at background
 function! redismru#validate(opts)
-  call s:jobstart('node '.s:validate_prog,  {
+  call s:jobstart('node '.s:validate_prog.' '.s:validate_args,  {
     \ 'on_stderr': function('s:OnError'),
     \ 'on_exit': function('s:OnExit'),
     \ 'action': 'validate',
@@ -75,6 +82,7 @@ endfunction
 
 function! redismru#append(file)
   let path = fnamemodify(a:file, ':p')
+  if !s:is_file_exists(path) | return | endif
   call s:redis('add', 'ZADD '.s:rediskey.' '
         \.localtime().' '.fnameescape(path))
   let idx = index(s:mru_files, path)
@@ -148,4 +156,9 @@ function! s:jobstart(argv, opts) abort
             call a:opts.on_exit(l:job_id, [v:shell_error], 'exit')
         endif
     endif
+endfunction
+
+function! s:is_file_exists(path) abort
+  if (a:path =~? g:redismru_ignore_pattern) | return 0 | endif
+  return getftype(a:path) ==# 'file'
 endfunction
