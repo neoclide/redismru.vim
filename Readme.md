@@ -32,7 +32,7 @@ can't get the list before it finish.
 
 _node script is used for async file validate (started on vim leave)_
 
-* install this plugin and unite.vim with plugin manager like vim-plug by:
+* install this plugin and unite.vim/denite.nvim with plugin manager like vim-plug by:
 
         Plug 'Shougo/unite.vim'
         Plug 'chemzqm/redismru.vim'
@@ -50,6 +50,12 @@ _node script is used for async file validate (started on vim leave)_
   (should no more than 2000)
 
 ##🍚Usage
+
+If you use [denite.nvim](https://github.com/Shougo/denite.nvim), you can add
+keymap like:
+
+      nnoremap <silent> <space>r  :<C-u>Denite redis_mru<cr>
+      nnoremap <silent> \r        :<C-u>Denite redis_mru:.<cr>
 
 * Open unite source with redismru source like:
 
