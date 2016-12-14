@@ -1,9 +1,6 @@
 # 🚩 Redismru.vim
 
-Most recently used files plugin for neovim using Redis and job-control feature.
-
-Some MRU would cost nearly 50ms to load MRU files at vim startup, this plugin
-use async job-control feature to avoid it.
+Most recently used files plugin for neovim/vim8 using Redis and job-control feature.
 
 Redismru also perform MRU list load on CursorHold, this makes work with multiply
 vim instances easier.
@@ -19,6 +16,12 @@ unite argument, like:
 
 **Note**, async file load at startup and would cost 10~100ms, you
 can't get the list before it finish.
+
+## Why Redismru?
+
+* Not performance influence on startup, true async load.
+* Sync files across all vim instance.
+* Support limit result to current cwd.
 
 ##🔍Install
 
