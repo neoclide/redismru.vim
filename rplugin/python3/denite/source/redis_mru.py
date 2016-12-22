@@ -9,6 +9,7 @@ class Source(Base):
     self.kind = 'file'
     self.home = expanduser('~')
     self.cwd = vim.eval('getcwd()') + '/'
+    self.sorters = []
 
   def gather_candidates(self, context):
     items = self.vim.eval('redismru#files()')
