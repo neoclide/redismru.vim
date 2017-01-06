@@ -11,7 +11,7 @@
 
 
 Author  : Qiming Zhao <chemzqm@gmail.com>
-Version : 0.4.0
+Version : 0.5.0
 License : MIT license {{{
 
   Copyright (c) 2017 chemzqm@gmail.com
@@ -165,6 +165,10 @@ Some optional variables could be used to customize the behaviour of Redismru.
 
 ==============================================================================
 CHANGELOG				 *redismru-changelog*
+
+0.5.0 - Jan 07, 2017
+
+	support delete action for Denite.nvim
 
 0.4.0 - Dec 15, 2016
 
