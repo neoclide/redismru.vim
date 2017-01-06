@@ -1,4 +1,4 @@
-*redismru.txt*	For neovim and Vim version 7.4.1590 or later.
+*redismru.txt*	For neovim and Vim version 8.0 or later.
 
 	A performed mru plugin with unite supported
 
@@ -14,7 +14,7 @@ Author  : Qiming Zhao <chemzqm@gmail.com>
 Version : 0.4.0
 License : MIT license {{{
 
-  Copyright (c) 2016 chemzqm@gmail.com
+  Copyright (c) 2017 chemzqm@gmail.com
 
   Permission is hereby granted, free of charge, to any person obtaining
   a copy of this software and associated documentation files (the
@@ -51,8 +51,8 @@ CHANGELOG		|redismru-changelog|
 ==============================================================================
 INTRODUCTION				*redismru-introduction*
 
-Redismru is a vim MRU (most recently used) file plugin built for neovim and vim
-with |job| feature. Redismru using local redis server as backend and using
+Redismru is a vim MRU (most recently used) file plugin built for neovim or
+vim8 with |job| feature. Redismru using local redis server as backend and using
 |job-control| feature to make it's won't affect your vim startup time.
 
 Redismru automatically start async file validation and file list load on vim
@@ -68,18 +68,16 @@ if you want to secure your redis.
 Redismru use unite.vim https://github.com/Shougo/unite.vim or denite.nvim
 https://github.com/Shougo/denite.nvim as user interface.
 
-so you will have to install it, like:
+so you will have to install it, with something like:
 
-	Plug 'Shougo/unite.vim'
+	Plug 'Shougo/unite.vim', {do: 'npm install'}
 	" or
-	Plug 'Shougo/denite.nvim'
-	
+	Plug 'Shougo/denite.nvim', {do: 'npm install'}
+
 Redismru use nodejs script to validate files in a subprocess on vim leave, you
-need to run this command after installed:
+need to run this command in root directory of project after installed:
 
 	npm install
-
-inside the root directory of project.
 
 ==============================================================================
 INSTALLATION				*redismru-installation*
@@ -93,8 +91,8 @@ Install with your favorite plugin managers like NeoBundle/Plugin/Plug
 ==============================================================================
 INTERFACE				*redismru-interface*
 
-You can use |unite| to open unite interface with redismru as source, press
-<cr> to open the selected buffer, press <d> to remove the file form mru
+You can use |unite| or |denite| to open unite interface with redismru as source,
+press <cr> to open the selected buffer, press <d> to remove the file form mru
 list (no actually file remove performed).
 
 Redismru source use inherited file kind, you can use file actions for the
@@ -103,7 +101,7 @@ candidates.
 ------------------------------------------------------------------------------
 COMMANDS 				*redismru-commands*
 
-:Denite redismru[.]
+:Denite redismru[:.]
 :Unite {opts} redismru[:dir]				*unite-redismru*
 
 		Show MRU list in unite/denite list, files would be ordered
@@ -115,8 +113,8 @@ COMMANDS 				*redismru-commands*
 
 :MruValidate					*mruvalidate*
 
-		Validate the files in mru list, it would remove the items that
-		no longer a exist file.
+		Validate the files in mru list, it would remove the records that
+		no longer a file on disk.
 
 
 ------------------------------------------------------------------------------
@@ -126,10 +124,22 @@ delete					*redismru-delete*
 
 	remove current from mru list (both from unite and redis-server)
 
+Other actions like `open` `split_open` `tab_open` `preview` are inherited from
+|kind-file|
+
 ------------------------------------------------------------------------------
 VARIABLES 				*redismru-variables*
 
 Some optional variables could be used to customize the behaviour of Redismru.
+
+*g:redismru_disable_sync*
+
+	Default `0`, Disable automatically sync by loading files from redis on CursorHold
+	event if `1`.
+
+*g;redismru_disable_auto_validate*
+
+	Default `0`, Disable auto validate files on VimLeavePre if `1`.
 
 *g:redismru_ignore_pattern*
 
@@ -152,15 +162,6 @@ Some optional variables could be used to customize the behaviour of Redismru.
 *g:redismru_key*
 
 	The key name inside redis server, default `vimmru`.
-
-*g:redismru_disable_sync*
-
-	Disable automatically sync by loading files from redis on CursorHold
-	event.
-
-*g;redismru_disable_auto_validate*
-
-	Disable auto validate files on VimLeavePre.
 
 ==============================================================================
 CHANGELOG				 *redismru-changelog*

@@ -15,6 +15,7 @@ let s:command = 'redis-cli -h '.g:redismru_host. ' -p '.g:redismru_port
 let s:rediskey = get(g:, 'redismru_key', 'vimmru')
 let s:mrulimit = get(g:, 'redismru_limit', 2000)
 let s:loaded = 0
+
 let s:validate_prog = expand('<sfile>:h:h').'/bin/clean.js'
 let s:validate_args = g:redismru_host.' '.g:redismru_port.' '.s:rediskey
 

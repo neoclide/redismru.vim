@@ -1,36 +1,43 @@
-# 🚩 Redismru.vim
+# Redismru.vim
 
-Most recently used files plugin for neovim/vim8 using Redis and job-control feature.
+Most recently used files plugin for vim8 & [Neovim](https://github.com/neovim/neovim)
+using Redis and job-control feature.
 
 Redismru also perform MRU list load on CursorHold, this makes work with multiply
 vim instances easier.
 
+## Why Redismru?
+
+* No performance influence on startup, very fast async load.
+* Sync files across all vim instance.
+* Support limit result to current cwd.
+
+## Usage
+
 You can also limit the files shown by Redismru by pass the a directory as first
 unite argument, like:
 
-    Unite redismru:[your_directory_path]
+``` vim
+Unite redismru
+```
 
-`[your_directory_path]` could also be `.` to indicate current working directory.
+Or use [denite.nvim](https://github.com/Shougo/denite.nvim)
 
-![redismru](https://chemzqm.me/images/02-23/redismru.jpg)
+``` vim
+" Search all recently files
+Denite redis_mru
+" Search recently files of current CWD
+Denite redis_mru:.
+```
 
 **Note**, async file load at startup and would cost 10~100ms, you
 can't get the list before it finish.
 
-## Why Redismru?
-
-* Not performance influence on startup, true async load.
-* Sync files across all vim instance.
-* Support limit result to current cwd.
-
 ##🔍Install
 
-* install redis with command like:
+* install [redis](https://redis.io/) and [nodejs](https://nodejs.org) with command like:
 
         brew install redis
-
-* install node with command like:
-
         brew install node
 
 _node script is used for async file validate (started on vim leave)_
