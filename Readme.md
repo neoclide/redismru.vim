@@ -9,12 +9,14 @@ vim instances easier.
 ## Why Redismru?
 
 * No performance influence on startup, very fast async load.
-* Sync files across all vim instance.
-* Support limit result to current cwd.
+* Sync file list across all vim instance.
+* Ignore pattern support.
+* Support limit results to specific directory and record remove.
+* Automatic file existing validation on vim leave (default).
 
 ## Usage
 
-You can also limit the files shown by Redismru by pass the a directory as first
+You can also limit the files shown by Redismru by pass a directory as first
 unite argument, like:
 
 ``` vim
@@ -33,7 +35,7 @@ Denite redis_mru:.
 **Note**, async file load at startup and would cost 10~100ms, you
 can't get the list before it finish.
 
-##🔍Install
+## 🔍Install
 
 * install [redis](https://redis.io/) and [nodejs](https://nodejs.org) with command like:
 
@@ -42,24 +44,29 @@ can't get the list before it finish.
 
 _node script is used for async file validate (started on vim leave)_
 
-* install this plugin and unite.vim/denite.nvim with plugin manager like vim-plug by:
+* install this plugin and denite.nvim/unite.vim with plugin manager like vim-plug by:
 
         Plug 'Shougo/unite.vim'
-        Plug 'chemzqm/redismru.vim'
+	      Plug 'chemzqm/redismru.vim', {do: 'npm install'}
 
 * CD to the project root and run:
 
         npm install
 
-##🚧Configuration
+## 🚧Configuration
 
-* **redismru_host** for redis host to connent (default 127.0.0.1).
-* **redismru_port** for redis port to connent (default 6379).
-* **redismru_key** for redis key to use for MRU list (default 'vimmru').
-* **redismru_limit** for limit the count for MRU list load and validat
-  (should no more than 2000)
+* **g:redismru_disable_auto_validate** set to `1` if you want to disable
+  validation on vim leave.
+* **g:redismru_disable_sync** set to `1` if you want to disable automatic sync
+  on CursorHold event.
+* **g:redismru_ignore_pattern** vim regex for ignored files, default see `:h g:redismru_ignore_pattern`.
+* **g:redismru_host** for redis host to connent (default 127.0.0.1).
+* **g:redismru_port** for redis port to connent (default 6379).
+* **g:redismru_key** for redis key to use for MRU list (default 'vimmru').
+* **g:redismru_limit** for limit the count for MRU list load and validation
+  (should no more than 2000).
 
-##🍚Usage
+## 🍚Usage
 
 If you use [denite.nvim](https://github.com/Shougo/denite.nvim), you can add
 keymap like:
@@ -79,7 +86,7 @@ keymap like:
 
         :MruValidate
 
-_validate would start async when vim exit, so you normally don't need this_
+_validation would start async when vim exit, so you normally don't need this_
 
 see `h:redismru` to learn more.
 

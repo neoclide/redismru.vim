@@ -7,12 +7,10 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "chemzqm@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "neovim-client": "^1.0.8",
     "node-parallel": "^0.1.6",
     "redis": "^2.6.1"
   }

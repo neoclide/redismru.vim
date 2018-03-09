@@ -1,6 +1,6 @@
 *redismru.txt*	For neovim and Vim version 8.0 or later.
 
-	A performed mru plugin with unite supported
+	A performed mru plugin with denite supported
 
                       __   _~
                      |  ] (_)~
@@ -11,7 +11,7 @@
 
 
 Author  : Qiming Zhao <chemzqm@gmail.com>
-Version : 0.5.0
+Version : 0.5.1
 License : MIT license {{{
 
   Copyright (c) 2017 chemzqm@gmail.com
@@ -55,8 +55,8 @@ Redismru is a vim MRU (most recently used) file plugin built for neovim or
 vim8 with |job| feature. Redismru using local redis server as backend and using
 |job-control| feature to make it's won't affect your vim startup time.
 
-Redismru automatically start async file validation and file list load on vim
-startup.
+Redismru support validatation of existing files, so you won't be bothered by
+removed files.
 
 ==============================================================================
 PREREQUIREMENT				*redismru-prerequirement*
@@ -68,16 +68,19 @@ if you want to secure your redis.
 Redismru use unite.vim https://github.com/Shougo/unite.vim or denite.nvim
 https://github.com/Shougo/denite.nvim as user interface.
 
-so you will have to install it, with something like:
+so you will have to install it, with something like (take |vim-plug| for
+example):
 
 	Plug 'Shougo/unite.vim', {do: 'npm install'}
 	" or
 	Plug 'Shougo/denite.nvim', {do: 'npm install'}
 
 Redismru use nodejs script to validate files in a subprocess on vim leave, you
-need to run this command in root directory of project after installed:
+need to run this command in root directory of project:
 
 	npm install
+
+Note: make sure you have properly https://nodejs.org installed.
 
 ==============================================================================
 INSTALLATION				*redismru-installation*
@@ -86,7 +89,7 @@ Install with your favorite plugin managers like NeoBundle/Plugin/Plug
 >
 	NeoBundle 'chemzqm/redismru.vim'
 	Plugin 'chemzqm/redismru.vim'
-	Plug 'chemzqm/redismru.vim'
+	Plug 'chemzqm/redismru.vim', {do: 'npm install'}
 
 ==============================================================================
 INTERFACE				*redismru-interface*
@@ -109,7 +112,7 @@ COMMANDS 				*redismru-commands*
 		|unite-options|
 
 		You can limit the mru files within a directory by optional dir
-		as unite argument.  Use . for current working directory.
+		as unite/denite argument.  Use `.` for current working directory.
 
 :MruValidate					*mruvalidate*
 
@@ -165,6 +168,10 @@ Some optional variables could be used to customize the behaviour of Redismru.
 
 ==============================================================================
 CHANGELOG				 *redismru-changelog*
+
+0.5.1 - Mar 09, 2018
+
+	document improve
 
 0.5.0 - Jan 07, 2017
 
