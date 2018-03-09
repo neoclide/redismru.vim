@@ -47,7 +47,7 @@ _node script is used for async file validate (started on vim leave)_
 * install this plugin and denite.nvim/unite.vim with plugin manager like vim-plug by:
 
         Plug 'Shougo/unite.vim'
-	      Plug 'chemzqm/redismru.vim', {do: 'npm install'}
+	      Plug 'neoclide/redismru.vim', {do: 'npm install'}
 
 * CD to the project root and run:
 

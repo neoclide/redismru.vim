@@ -87,9 +87,9 @@ INSTALLATION				*redismru-installation*
 
 Install with your favorite plugin managers like NeoBundle/Plugin/Plug
 >
-	NeoBundle 'chemzqm/redismru.vim'
-	Plugin 'chemzqm/redismru.vim'
-	Plug 'chemzqm/redismru.vim', {do: 'npm install'}
+	NeoBundle 'neoclide/redismru.vim'
+	Plugin 'neoclide/redismru.vim'
+	Plug 'neoclide/redismru.vim', {do: 'npm install'}
 
 ==============================================================================
 INTERFACE				*redismru-interface*
