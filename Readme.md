@@ -1,5 +1,9 @@
 # Redismru.vim
 
+[![](http://img.shields.io/github/issues/neoclide/redismru.vim.svg)](https://github.com/neoclide/redismru.vim/issues)
+[![](http://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![](https://img.shields.io/badge/doc-%3Ah%20redismru.txt-red.svg)](doc/redismru.txt)
+
 Most recently used files plugin for vim8 & [Neovim](https://github.com/neovim/neovim)
 using Redis and job-control feature.
 
@@ -89,7 +93,3 @@ keymap like:
 _validation would start async when vim exit, so you normally don't need this_
 
 see `h:redismru` to learn more.
-
-## License
-
-MIT

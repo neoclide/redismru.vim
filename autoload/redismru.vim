@@ -114,7 +114,9 @@ function! s:redis(action, args)
 endfunction
 
 function! s:OnError(job_id, data, event) dict
-  echohl Error | echon a:data | echohl None
+  for msg in a:data
+    if !empty(msg) | echoerr msg | endif
+  endfor
 endfunction
 
 function! s:OnData(job_id, data, event) dict
