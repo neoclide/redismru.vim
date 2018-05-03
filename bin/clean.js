@@ -2,15 +2,16 @@ var Parallel = require('node-parallel')
 var redis = require('redis')
 var fs = require('fs')
 var path = require('path')
+var oneYearAgo = Math.floor(Date.now()/1000) - 24*60*60*365
 
 var client = redis.createClient(process.argv[3], process.argv[2])
 client.on('error', function (err) {
   console.error('validate error: ' + err.message)
 })
 
-var key = process.argv[4]
+var key = process.argv[4] || 'vimmru'
 
-client.zrange(key, 0, 4000, function (err, members) {
+client.zrange(key, 0, 8000, function (err, members) {
   var p = new Parallel()
   members.forEach(function (file) {
     p.add(function (cb) {
@@ -21,7 +22,14 @@ client.zrange(key, 0, 4000, function (err, members) {
             cb()
           })
         } else {
-          cb()
+          client.zscore(key, file, function (err, score) {
+            if (err) return cb(err)
+            if (score < oneYearAgo) {
+              client.zrem(key, file, cb)
+            } else {
+              cb()
+            }
+          })
         }
       })
     })
